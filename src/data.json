@@ -1,0 +1,20 @@
+[
+  {
+    "avatar": "https://i.pravatar.cc/300?male",
+    "name": "Иван Петров",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo consequatur rem sapiente repellendus necessitatibus sequi mollitia excepturi tempore porro totam!",
+    "profile": "tutor",
+    "skills": ["Математика", "Физика"],
+    "experience": "2-5",
+    "price": "Бесплатно"
+  },
+  {
+    "avatar": "https://i.pravatar.cc/200?male",
+    "name": "Сергей Иванов",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo consequatur rem sapiente repellendus necessitatibus sequi mollitia excepturi tempore porro totam!",
+    "profile": "mentor",
+    "skills": ["JavaScript", "C#"],
+    "experience": "5-10",
+    "price": "По договоренности"
+  }
+]

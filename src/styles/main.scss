@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .parent-input:has(input:checked) {
+    @apply bg-slate-800 text-white transition;
+  }
+}
+
+$material-design-icons-font-directory-path: "~material-design-icons-iconfont/dist/fonts/";
+
+@import "~material-design-icons-iconfont/src/material-design-icons";
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  // font-family: "Nunito", sans-serif;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: 0.2px;
+  height: 2000px;
+  background: #f7f8f9;
+  @apply text-slate-800;
+}
