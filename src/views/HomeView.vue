@@ -38,44 +38,16 @@
         </div>
       </div>
     </div>
-
-    <div class="py-6">
-      <v-swiper :prev="prev" :next="next" />
-    </div>
+    <v-swiper :prev="prev" :next="next" />
   </section> -->
   <section class="py-4" id="mentors">
-    <div class="py-2 flex justify-center items-center gap-2">
-      <div class="border-[1px] border-slate-800 inline-flex rounded-xl p-1">
-        <div
-          class="parent-input py-2 px-4 text-slate-800 text-base md:text-lg font-light rounded-l-xl"
-        >
-          <input
-            v-model="profiles"
-            class="hidden"
-            type="radio"
-            name="radio-group"
-            id="1"
-            value="tutor"
-            checked
-          />
-          <label class="cursor-pointer" for="1">ищу репетитора</label>
-        </div>
-        <div
-          class="parent-input py-2 px-4 text-slate-800 text-base md:text-lg font-light rounded-r-xl"
-        >
-          <input
-            v-model="profiles"
-            class="hidden"
-            type="radio"
-            name="radio-group"
-            id="2"
-            value="mentor"
-          />
-          <label class="cursor-pointer" for="2">Ищу ментора</label>
-        </div>
-      </div>
+    <div class="py-2">
+      <!-- <v-check-button v-model="profiles" /> -->
+      <h3 class="text-slate-800 text-xl md:text-4xl font-medium py-2">
+        Наши менторы
+      </h3>
     </div>
-    <v-users :isProfile="profiles" />
+    <v-mentors :mentors="mentors" />
   </section>
   <section class="py-4">
     <h3
@@ -122,40 +94,26 @@
     >
       FAQ
     </h3>
-    <div class="lg:w-3/4 mx-auto">
-      <v-question-item
-        v-for="(item, index) in question"
-        :key="index"
-        :title="item.title"
-        :description="item.description"
-      />
-    </div>
+    <v-question />
   </section>
 </template>
 
 <script setup>
-import { ref } from "vue";
-// import VSwiper from "@/components/home/vSwiper.vue";
-import vUsers from "@/components/home/vUsers.vue";
-import vQuestionItem from "@/components/home/vQuestionItem.vue";
+import { ref, onMounted } from "vue";
+import vSwiper from "@/components/home/slider/Swiper.vue";
+import vCheckButton from "@/components/home/mentors/CheckButton.vue";
+import vMentors from "@/components/home/mentors/Mentors.vue";
+import vQuestion from "@/components/home/faq/Question.vue";
+import Api from "@/api/database.controller";
 
-const profiles = ref("tutor");
-
-const question = [
-  {
-    title: "Что такое TalentMentor?",
-    description:
-      "TalentMentor - это онлайн-платформа, которая поможет вам найти опытного наставника, который поделится своим знанием и опытом, чтобы помочь вам достичь новых высот в вашей карьере или личностном развитии",
-  },
-  {
-    title: "Как я могу стать ментором на TalentMentor?",
-    description:
-      "Очень просто. Достаточно оставить заявку, и мы обязательно вас добавим.",
-  },
-];
-
+const mentors = ref(null);
+// const profiles = ref("tutor");
 // const prev = ref(null);
 // const next = ref(null);
+
+onMounted(async () => {
+  mentors.value = await Api.getMentors();
+});
 </script>
 
 <style lang="scss" scoped></style>

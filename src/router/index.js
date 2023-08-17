@@ -8,10 +8,14 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/mentor",
-    name: "mentor",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/profileView.vue"),
+    path: "/profile/:id",
+    name: "profile",
+    component: () => import("../views/ProfileView.vue"),
+  },
+  {
+    path: "/create-profile",
+    name: "create",
+    component: () => import("../views/AuthView.vue"),
   },
 ];
 

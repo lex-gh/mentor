@@ -8,7 +8,7 @@
         <h3 class="text-2xl text-gray-900 font-light md:hidden block">TM</h3>
       </router-link>
       <router-link
-        to="/mentor"
+        to="/create-profile"
         class="flex items-center text-gray-900 text-md font-light"
       >
         <!-- 👩‍🏫 -->
