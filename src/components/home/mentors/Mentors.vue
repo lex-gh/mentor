@@ -1,5 +1,4 @@
 <template>
-  <v-filter v-model="search" />
   <div class="mentors">
     <div v-if="!mentors" class="grid-auto-fill">
       <v-skeleton v-for="(item, index) in 5" :key="index" />
@@ -22,22 +21,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch, onUpdated, nextTick } from "vue";
 import vSkeleton from "@/components/base/Skeleton.vue";
-import vFilter from "@/components/home/mentors/Filter.vue";
 import MentorsItem from "./MentorsItem.vue";
-import data from "@/data.json";
-
-const search = ref("");
 
 const props = defineProps({
-  isProfile: String,
   mentors: Array,
 });
-
-const userProfile = () => {
-  return data.filter((item) => item.profile === props.isProfile);
-};
 </script>
 
 <style lang="scss">

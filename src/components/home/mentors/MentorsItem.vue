@@ -7,10 +7,10 @@
       class="h-full flex flex-col"
     >
       <div class="max-w-60 h-60 overflow-hidden rounded-lg">
-        <img class="w-full h-auto object-cover" :src="src" />
+        <img class="w-full h-full object-cover" :src="src" />
       </div>
-      <h5 class="pt-4 pb-2 text-xl block">{{ profile.name }}</h5>
-      <div class="star flex item-center gap-2 pb-2">
+      <h5 class="pt-4 pb-2 text-xl block">{{ profile.fullname }}</h5>
+      <div v-if="profile.review" class="star flex item-center gap-2 pb-2">
         <div>
           <i
             class="material-icons star text-yellow-500 block"
@@ -24,12 +24,19 @@
       <div class="descr line-clamp-3 font-light text-sm flex-1">
         {{ profile.about }}
       </div>
+      <div v-if="profile.reviews" class="py-2">
+        <i
+          class="material-icons star text-yellow-400"
+          v-for="item in averageValueReview(profile.reviews)"
+          :key="item"
+        ></i>
+      </div>
       <div class="py-4">
         <ul class="flex gap-2 flex-wrap">
           <li
             v-for="(skill, index) in tags(profile.tags)"
             :key="index"
-            class="px-2 py-1 border-[1px] border-slate-800 rounded-xl hover:bg-slate-800 hover:text-white transition text-xs font-light"
+            class="px-2 py-1 rounded-xl bg-slate-300 text-slate-800 transition text-xs font-light"
             ref="tag"
           >
             {{ skill }}
@@ -56,6 +63,7 @@
 import { computed, ref } from "vue";
 
 const tag = ref(null);
+
 const props = defineProps({
   profile: Object,
 });
@@ -75,6 +83,16 @@ const tags = (value) => {
 
   return arr;
 };
+
+const averageValueReview = computed(() => {
+  return (value) => {
+    const count = value.reduce((acc, item) => {
+      acc += JSON.parse(item).rating;
+      return acc;
+    }, 0);
+    return Math.floor(count / value.length);
+  };
+});
 </script>
 
 <style lang="scss" scoped></style>

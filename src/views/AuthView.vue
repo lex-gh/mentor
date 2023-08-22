@@ -7,7 +7,7 @@
     <form @submit.prevent="handlerForm">
       <form-field
         group="fullName"
-        field-name="Ваше имя и фамиля"
+        field-name="Ваше имя и фамилия"
         field-description="Так вы будете видны на сайте"
       >
         <template #field>
@@ -37,7 +37,7 @@
           />
         </template>
       </form-field>
-      <form-field
+      <!-- <form-field
         group="nickname"
         field-name="Ник в Telegram (без @)"
         field-description="Для связи с вами"
@@ -52,7 +52,7 @@
             placeholder="nickname"
           />
         </template>
-      </form-field>
+      </form-field> -->
       <form-field
         group="about"
         field-name="Расскажите о себе"
@@ -115,7 +115,7 @@
             name="price"
             id="price"
           >
-            <option value="0">Выберите один из вариантов</option>
+            <option value="">Выберите один из вариантов</option>
             <option class="w-full h-10 py-2 text-lg hover:bg-slate-500">
               Бесплатно
             </option>
@@ -155,6 +155,8 @@
       <button
         type="submit"
         class="px-8 py-4 bg-slate-700 text-white rounded-lg flex gap-2 items-center"
+        :class="{ 'pointer-events-none opacity-50': disabled }"
+        :disabled="disabled"
       >
         Добавить профиль
         <span v-if="isLoad" class="loader"></span>
@@ -165,19 +167,30 @@
 
 <script setup>
 import FormField from "@/components/auth/FormField.vue";
-import { reactive, ref } from "vue";
-import Api from "@/api/database.controller";
+import { reactive, ref, watch } from "vue";
+import Profile from "@/api/profile.controller";
 import router from "@/router";
 
 const isLoad = ref(false);
+const disabled = ref(true);
 const form = reactive({
   fullName: "",
   avatar: null,
-  nickname: "",
   about: "",
   experience: "",
   tags: "",
-  price: 0,
+  price: "",
+});
+
+watch(form, (newValue, oldValue) => {
+  const valid = Object.values(form).every((k) => !!k);
+
+  if (valid) {
+    console.log("dewdewdw");
+    disabled.value = false;
+  } else {
+    disabled.value = true;
+  }
 });
 
 const uploadImage = (e) => {
@@ -187,7 +200,14 @@ const uploadImage = (e) => {
 
 const handlerForm = async () => {
   try {
-    const profile = await Api.createProfile(form);
+    const valid = Object.values(form).every((k) => !!k);
+
+    if (!valid) {
+      alert("Нужно заполнить всю форму");
+      return;
+    }
+
+    const profile = await Profile.createProfile(form);
     isLoad.value = true;
     router.push({ name: "profile", params: { id: profile.id } });
   } catch (error) {

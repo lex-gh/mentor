@@ -40,16 +40,18 @@
     </div>
     <v-swiper :prev="prev" :next="next" />
   </section> -->
-  <section class="py-4" id="mentors">
+  <section class="py-10" id="mentors">
     <div class="py-2">
       <!-- <v-check-button v-model="profiles" /> -->
       <h3 class="text-slate-800 text-xl md:text-4xl font-medium py-2">
         Наши менторы
       </h3>
     </div>
+    {{ search }}
+    <v-filter @search="handlerSearch" @checkedTag="onCheckedTag" />
     <v-mentors :mentors="mentors" />
   </section>
-  <section class="py-4">
+  <section class="py-10">
     <h3
       class="text-slate-800 text-2xl md:text-4xl font-medium mb-8 text-center"
     >
@@ -88,7 +90,7 @@
       </div>
     </div>
   </section>
-  <section class="py-4">
+  <section class="py-10">
     <h3
       class="text-slate-800 text-2xl md:text-4xl font-medium mb-8 text-center"
     >
@@ -104,16 +106,26 @@ import vSwiper from "@/components/home/slider/Swiper.vue";
 import vCheckButton from "@/components/home/mentors/CheckButton.vue";
 import vMentors from "@/components/home/mentors/Mentors.vue";
 import vQuestion from "@/components/home/faq/Question.vue";
-import Api from "@/api/database.controller";
+import Profile from "@/api/profile.controller";
+import vFilter from "@/components/home/mentors/Filter.vue";
 
+const search = ref("");
 const mentors = ref(null);
 // const profiles = ref("tutor");
 // const prev = ref(null);
 // const next = ref(null);
 
 onMounted(async () => {
-  mentors.value = await Api.getMentors();
+  mentors.value = await Profile.getMentors();
 });
+
+const onCheckedTag = async (value) => {
+  mentors.value = await Profile.filterTag(value);
+};
+
+const handlerSearch = (value) => {
+  Profile.search(value);
+};
 </script>
 
 <style lang="scss" scoped></style>
