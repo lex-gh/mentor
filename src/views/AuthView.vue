@@ -37,22 +37,7 @@
           />
         </template>
       </form-field>
-      <!-- <form-field
-        group="nickname"
-        field-name="Ник в Telegram (без @)"
-        field-description="Для связи с вами"
-      >
-        <template #field>
-          <input
-            v-model="form.nickname"
-            class="w-full h-10 px-2 border-2 outline-none rounded-md focus:border-slate-400 transition-colors"
-            type="text"
-            name="nickname"
-            id="nickname"
-            placeholder="nickname"
-          />
-        </template>
-      </form-field> -->
+
       <form-field
         group="about"
         field-name="Расскажите о себе"
@@ -170,6 +155,7 @@ import FormField from "@/components/auth/FormField.vue";
 import { reactive, ref, watch } from "vue";
 import Profile from "@/api/profile.controller";
 import router from "@/router";
+import { useValid } from "@/helpers/useValid";
 
 const isLoad = ref(false);
 const disabled = ref(true);
@@ -183,9 +169,9 @@ const form = reactive({
 });
 
 watch(form, (newValue, oldValue) => {
-  const valid = Object.values(form).every((k) => !!k);
+  // const valid = Object.values(form).every((k) => console.log(k));
 
-  if (valid) {
+  if (useValid(form)) {
     console.log("dewdewdw");
     disabled.value = false;
   } else {
@@ -200,9 +186,10 @@ const uploadImage = (e) => {
 
 const handlerForm = async () => {
   try {
-    const valid = Object.values(form).every((k) => !!k);
+    // const valid = Object.values(form).every((k) => !!k);
 
-    if (!valid) {
+    if (!useValid(form)) {
+      console.log(form);
       alert("Нужно заполнить всю форму");
       return;
     }
@@ -258,3 +245,4 @@ const handlerForm = async () => {
   }
 }
 </style>
+@/helpers

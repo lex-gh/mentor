@@ -2,7 +2,7 @@
   <v-skeleton v-if="!profile" />
   <div v-else class="py-4 flex flex-wrap gap-6">
     <div
-      class="sm:w-1/3 w-full h-auto rounded-xl overflow-hidden self-baseline"
+      class="md:w-1/2 w-full h-auto rounded-xl overflow-hidden self-baseline"
     >
       <img class="w-full h-auto" :src="profile.avatar" alt="avatar" />
     </div>
@@ -134,7 +134,7 @@ const getProfile = async () => {
 const handlerFormReview = () => {
   const { params } = router.currentRoute.value;
   isLoad.value = true;
-  Api.createReview(params.id, review).then(() => {
+  Profile.createReview(params.id, review).then(() => {
     getProfile(params.id).then(() => {
       isLoad.value = false;
     });

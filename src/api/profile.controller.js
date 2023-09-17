@@ -40,7 +40,12 @@ class Controller {
         .from("mentors")
         .select("*")
         .textSearch("fullname", value);
-      console.log(data);
+      const arr = await supabase
+        .from("mentors")
+        .select("*")
+        .textSearch("tags", value);
+
+      console.log(data, arr);
     } catch (error) {
       console.log(error);
     }

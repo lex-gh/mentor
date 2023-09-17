@@ -10,7 +10,7 @@
         @input="$emit('search', $event.target.value)"
         class="w-full h-full outline-none px-10 text-slate-700"
         type="text"
-        placeholder="Название предмета, профессия или что угодно через запятую"
+        placeholder="Название предмета, профессия или имя через запятую"
       />
     </div>
     <div class="tags py-4">

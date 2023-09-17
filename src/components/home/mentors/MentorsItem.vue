@@ -10,26 +10,25 @@
         <img class="w-full h-full object-cover" :src="src" />
       </div>
       <h5 class="pt-4 pb-2 text-xl block">{{ profile.fullname }}</h5>
-      <div v-if="profile.review" class="star flex item-center gap-2 pb-2">
-        <div>
-          <i
-            class="material-icons star text-yellow-500 block"
-            v-for="(item, i) of Math.floor(Math.random() * 5 + 1)"
-            :key="i"
-          ></i>
-        </div>
 
-        <span class="text-light text-blue-500 hover:underline">3 отзыва</span>
-      </div>
       <div class="descr line-clamp-3 font-light text-sm flex-1">
         {{ profile.about }}
       </div>
-      <div v-if="profile.reviews" class="py-2">
+      <div v-if="profile.reviews" class="py-2 inline-flex">
         <i
           class="material-icons star text-yellow-400"
           v-for="item in averageValueReview(profile.reviews)"
           :key="item"
-        ></i>
+        ></i
+        ><span class="ml-2"
+          >{{ profile.reviews.length }}
+          {{
+            useDeclension(
+              ["отзыв", "отзыва", "отзывов"],
+              profile.reviews.length
+            )
+          }}</span
+        >
       </div>
       <div class="py-4">
         <ul class="flex gap-2 flex-wrap">
@@ -93,6 +92,17 @@ const averageValueReview = computed(() => {
     return Math.floor(count / value.length);
   };
 });
+
+const useDeclension = (worlds, value) => {
+  const cases = [2, 0, 1, 1, 1, 2];
+  const str =
+    worlds[
+      value % 100 > 4 && value % 100 < 20
+        ? 2
+        : cases[value % 10 < 5 ? value % 10 : 5]
+    ];
+  return str;
+};
 </script>
 
 <style lang="scss" scoped></style>

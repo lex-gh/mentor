@@ -7,7 +7,7 @@
     ></div>
     <div class="md:w-2/3 md:bg-white md:p-8 rounded-xl z-50 relative">
       <h1 class="text-2xl lg:text-4xl font-bold text-slate-800">
-        Найдите идеального репетитора или ментора!
+        Найдите идеального ментора!
       </h1>
       <p class="text-md font-bold py-4 text-slate-700">
         Развивайте свой потенциал с наставниками по всему миру.
@@ -63,9 +63,10 @@
           <i class="material-icons switch_account"></i> Выбери ментора
         </p>
         <span class="text-md font-light"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          dignissimos quis fugiat doloremque voluptates corporis pariatur enim
-          hic natus ullam.</span
+          >Здесь работают более 500 специалистов из Avito,Yandex и других
+          компаний. Вы можете выбрать подходящего специалиста в зависимости от
+          его специализации и стоимости собеседования. <br /><br />
+          Все наставники проходят нашу проверку.</span
         >
       </div>
       <div>
@@ -73,9 +74,9 @@
           <i class="material-icons drive_file_rename_outline"></i> Напиши ему
         </p>
         <span class="text-md font-light"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          dignissimos quis fugiat doloremque voluptates corporis pariatur enim
-          hic natus ullam.</span
+          >Оставьте заявку на сайте. Напишите, что вам нужно и что вы хотите
+          получить. <br /><br />Помните, что если проблема четко сформулирована,
+          то она наполовину решена. Чем подробнее, тем лучше.</span
         >
       </div>
       <div>
@@ -83,9 +84,11 @@
           <i class="material-icons forum"></i>Обсудите условия
         </p>
         <span class="text-md font-light"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          dignissimos quis fugiat doloremque voluptates corporis pariatur enim
-          hic natus ullam.</span
+          >Передайте заявку своему наставнику. Наставник оценит задание и
+          свяжется с вами для обсуждения деталей и согласования времени.
+          Стоимость и продолжительность занятия определяются каждым наставником
+          самостоятельно.<br /><br />
+          Мы не вмешиваемся.</span
         >
       </div>
     </div>
